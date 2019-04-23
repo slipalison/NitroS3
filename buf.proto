@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+
+option java_multiple_files = true; 
+option java_package = "io.grpc.s3.aws";
+option java_outer_classname = "NitroS3FileControl";
+
+package NitroS3;
+
+service NitroS3Service{
+    rpc SendFile(FileSend) returns (ResultFile){}
+}
+
+message FileSend {
+    bytes file = 1;
+    string bucket = 2;
+    string name = 3;
+    string extension = 4;
+}
+
+message ResultFile {
+    bool isSuccess = 1;
+}

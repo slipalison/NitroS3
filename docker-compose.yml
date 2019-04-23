@@ -1,0 +1,97 @@
+version: '3.4'
+
+services:
+  nitros3:
+    image: ${DOCKER_REGISTRY-}nitros3
+    build:
+      context: .
+      dockerfile: NitroS3/Dockerfile
+    depends_on:
+#      - s3
+#      - localstack-s3
+#      - aws-s3
+      - minio
+    environment:
+    #  - AWS_ACCESS_KEY_ID=x
+    #  - AWS_SECRET_ACCESS_KEY=x
+      - AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+      - AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+      - AwsAccessKey=AKIAIOSFODNN7EXAMPLE
+      - AwsSecretKey=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+      - MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE
+      - MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+
+#  minio1: 
+#    image: minio/minio
+#    ports: 
+#      - "9001:9000"
+#    environment:
+#      - AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+#      - AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+#      - AwsAccessKey=AKIAIOSFODNN7EXAMPLE
+#      - AwsSecretKey=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+#      - MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE
+#      - MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+
+  minio:
+    image: minio/minio
+    hostname: minio
+    volumes:
+      - minio1-data:/export
+    ports:
+      - "9000:9000"
+#    networks:
+#      - minio_distributed
+    environment:
+      MINIO_ACCESS_KEY: AKIAIOSFODNN7EXAMPLE
+      MINIO_SECRET_KEY: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+#    deploy:
+#      restart_policy:
+#        delay: 10s
+#        max_attempts: 10
+#        window: 60s
+#      placement:
+#        constraints:
+#          - node.labels.minio1==true
+#    command: server http://minio1/export http://minio2/export http://minio3/export http://minio4/export
+
+volumes:
+  minio1-data:
+
+  minio2-data:
+
+  minio3-data:
+
+  minio4-data:
+
+
+
+#  s3: 
+#    image: scireum/s3-ninja:4
+#    ports: 
+#      - "9444:80"
+#    environment:
+#    #  - AWS_ACCESS_KEY_ID=x
+#    #  - AWS_SECRET_ACCESS_KEY=x
+#      - AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+#      - AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+#      - AwsAccessKey=AKIAIOSFODNN7EXAMPLE
+#      - AwsSecretKey=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+#
+#
+#
+#  localstack-s3:
+#    image: localstack/localstack
+#    environment:
+#      - SERVICES=s3:5001
+#      - DEFAULT_REGION=us-east-1
+#      - HOSTNAME=localstack-s3
+#    ports:
+#      - "5001:5001"
+#      - "${PORT_WEB_UI-8080}:${PORT_WEB_UI-8080}"
+#
+#  aws-s3:
+#    image: jbergknoff/s3rver
+#    ports:
+#     - "5000:5000"
+#
