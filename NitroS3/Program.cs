@@ -40,6 +40,10 @@ namespace NitroS3.ConsoleTest
                 using (Stream s = new MemoryStream(myByte))
                     await minioClient.PutObjectAsync(bucket, objName, s, s.Length);
 
+
+
+
+
             }
             catch (Exception ex)
             {

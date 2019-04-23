@@ -15,7 +15,7 @@ namespace NitroS3.Server
         public static void Main(string[] args)
         {
 
-            var options = new List<ChannelOption>()
+            var options = new List<ChannelOption>
                 {
                     new ChannelOption(ChannelOptions.MaxSendMessageLength,32*1024*1024),
                     new ChannelOption(ChannelOptions.MaxReceiveMessageLength,32*1024*1024),

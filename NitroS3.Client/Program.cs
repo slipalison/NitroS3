@@ -32,7 +32,7 @@ namespace NitroS3.Client
                 Bucket = "testesbucket",
                 Extension = "jpg",
                 File = ByteString.CopyFrom(myByte),
-                Name = $"GRPC{Guid.NewGuid().ToString().Replace("-", "").ToLower()}"
+                Name = $"olar/teste/GRPC"
             });
 
             Console.WriteLine($"Esta no S3 ?: { (reply.IsSuccess ? "Sim" : "Não")}");
