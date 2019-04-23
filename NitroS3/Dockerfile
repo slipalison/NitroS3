@@ -18,4 +18,4 @@ COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "NitroS3.dll"]
 
 
-#docker run -it -e MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE -e MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY -p 9000:9000 minio/minio server /d ata
+#docker run -it -e MINIO_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE -e MINIO_SECRET_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY -p 9000:9000 minio/minio server /data
