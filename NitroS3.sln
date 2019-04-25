@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NitroS3.Proto", "NitroS3.Pr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NitroS3.Client", "NitroS3.Client\NitroS3.Client.csproj", "{611ECBDD-F68D-41A3-9BFB-1C1B5B8FEDAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NitroS3.Server", "NitroS3.Server\NitroS3.Server.csproj", "{78390A76-3916-4EA3-AB09-89842E8B85C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NitroS3.Server", "NitroS3.Server\NitroS3.Server.csproj", "{78390A76-3916-4EA3-AB09-89842E8B85C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NitroS3.Test", "NitroS3.Test\NitroS3.Test.csproj", "{57292BD8-725B-46CD-B78C-19AAE109739E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,14 @@ Global
 		{78390A76-3916-4EA3-AB09-89842E8B85C8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78390A76-3916-4EA3-AB09-89842E8B85C8}.Release|x64.ActiveCfg = Release|Any CPU
 		{78390A76-3916-4EA3-AB09-89842E8B85C8}.Release|x64.Build.0 = Release|Any CPU
+		{57292BD8-725B-46CD-B78C-19AAE109739E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57292BD8-725B-46CD-B78C-19AAE109739E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57292BD8-725B-46CD-B78C-19AAE109739E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{57292BD8-725B-46CD-B78C-19AAE109739E}.Debug|x64.Build.0 = Debug|Any CPU
+		{57292BD8-725B-46CD-B78C-19AAE109739E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57292BD8-725B-46CD-B78C-19AAE109739E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57292BD8-725B-46CD-B78C-19AAE109739E}.Release|x64.ActiveCfg = Release|Any CPU
+		{57292BD8-725B-46CD-B78C-19AAE109739E}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

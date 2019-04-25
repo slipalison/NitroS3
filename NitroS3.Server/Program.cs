@@ -23,9 +23,17 @@ namespace NitroS3.Server
                     new ChannelOption(ChannelOptions.SoReuseport,1)
                 };
 
+
+            IMinioClientVirtual minioClient = new MinioClientVirtual(
+             "localhost:9000",
+             "AKIAIOSFODNN7EXAMPLE",
+             "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+             "us-east-1");
+
+
             var server = new Grpc.Core.Server(options)
             {
-                Services = { NitroS3Service.BindService(new NitroServerImpl()) },
+                Services = { NitroS3Service.BindService(new NitroServerImpl(minioClient)) },
                 Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
             };
             server.Start();
@@ -38,23 +46,22 @@ namespace NitroS3.Server
         }
     }
 
-    class NitroServerImpl : NitroS3Service.NitroS3ServiceBase
+    public class NitroServerImpl : NitroS3Service.NitroS3ServiceBase
     {
+        private IMinioClientVirtual _minioClient;
+
+        public NitroServerImpl(IMinioClientVirtual minioClient)
+        {
+            _minioClient = minioClient;
+        }
+
         public override async Task<ResultFile> SendFile(FileSend request, ServerCallContext context)
         {
 
-            var minioClient = new MinioClient(
-              "localhost:9000",
-              "AKIAIOSFODNN7EXAMPLE",
-              "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-              "us-east-1");
-
-            var listBucket = await minioClient.ListBucketsAsync();
-
-            if (!listBucket.Buckets.Any(x => x.Name == request.Bucket)) await minioClient.MakeBucketAsync(request.Bucket);
+            if (!(await _minioClient.BucketExistsAsync(request.Bucket))) await _minioClient.MakeBucketAsync(request.Bucket);
 
             using (Stream s = new MemoryStream(request.File.ToArray()))
-                await minioClient.PutObjectAsync(request.Bucket, $"{request.Name}.{request.Extension}", s, s.Length);
+                await _minioClient.PutObjectAsync(request.Bucket, $"{request.Name}.{request.Extension}", s, s.Length);
 
             return new ResultFile { IsSuccess = true };
         }
